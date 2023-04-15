@@ -13,15 +13,13 @@ const { NotImplementedError } = require('../extensions/index.js');
  */
 function getSeason(date) {
   if (date == null) return 'Unable to determine the time of year!';
-  if (date instanceof Date == false && !isNaN(date)) throw new Error("Invalid date!");
-  if (Object.prototype.toString.call(date) !== "[object Date]") throw new Error("Invalid date!");
+  if (date instanceof Date == false) throw new Error("Invalid date!");
+  if (Object.getOwnPropertyNames(date).length != 0) throw new Error("Invalid date!");
     try {
       date.toLocaleString();
       
     } catch(e) {
-      if (e) throw new Error('Invalide date!')
-      //e.message = "Invalid date!";
-      //return e.message;
+      if (e) throw new Error('Invalide date!');
     }
     let index = date.getMonth();   
       if(index >= 0 && index <= 1 || index == 11) return 'winter';
